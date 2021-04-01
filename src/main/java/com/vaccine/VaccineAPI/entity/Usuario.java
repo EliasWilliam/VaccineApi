@@ -1,45 +1,60 @@
 package com.vaccine.VaccineAPI.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(uniqueConstraints ={
+        @UniqueConstraint(columnNames = "email", name = "email_us"),
+        @UniqueConstraint(columnNames = "cpf", name = "cpf_us")}
 
-
+)
 public class Usuario {
 
-    public long getId() {
-        return id;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank
+    private String nome;
+    @Email
+    @NotBlank
+    private String email;
+    @CPF
+    @NotBlank
+    private String cpf;
+    @NotNull
+    private LocalDate dataNascimento;
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public long getNome() {
+
+    public Long getId() { return id; }
+
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(long nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public long getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(long email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -50,10 +65,4 @@ public class Usuario {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
-    private long id;
-    private long nome;
-    private long email;
-    private long cpf;
-    private LocalDate dataNascimento;
 }

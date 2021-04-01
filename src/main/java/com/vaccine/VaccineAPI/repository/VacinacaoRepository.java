@@ -2,9 +2,9 @@ package com.vaccine.VaccineAPI.repository;
 
 import com.vaccine.VaccineAPI.dto.VacinacaoDTO;
 import com.vaccine.VaccineAPI.entity.Vacinacao;
+import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public class VacinacaoRepository extends JpaRepository<Vacinacao, Long> {
-    public static Vacinacao save(Vacinacao vacinacao) {
-        return new VacinacaoDTO(VacinacaoRepository.save(VacinacaoDTO.converter(vacinacao)));
-    }
+@Repository
+public interface VacinacaoRepository extends JpaRepository<Vacinacao, Long> {
 }

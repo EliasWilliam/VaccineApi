@@ -1,17 +1,30 @@
 package com.vaccine.VaccineAPI.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Entity
 public class Vacinacao {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO.IDENTITY)
-    public long getId() {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank
+    private String nomeVacina;
+    @NotNull
+    @ManyToOne @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+    @NotNull
+    private LocalDate dataAplicacao;
+
+    //getters e setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -23,24 +36,20 @@ public class Vacinacao {
         this.nomeVacina = nomeVacina;
     }
 
-    public String getUsuarioEmail() {
-        return usuarioEmail;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioEmail(String usuarioEmail) {
-        this.usuarioEmail = usuarioEmail;
+    public void setUsuario(Usuario usuarioId) {
+        this.usuario = usuarioId;
     }
 
-    public LocalDate getDataApalicao() {
-        return dataApalicao;
+    public LocalDate getDataAplicacao() {
+        return dataAplicacao;
     }
 
-    public void setDataApalicao(LocalDate dataApalicao) {
-        this.dataApalicao = dataApalicao;
+    public void setDataAplicacao(LocalDate dataAplicacao) {
+        this.dataAplicacao = dataAplicacao;
     }
 
-    private long id;
-    private String nomeVacina;
-    private String usuarioEmail;
-    private LocalDate dataApalicao;
 }

@@ -1,5 +1,6 @@
 package com.vaccine.VaccineAPI.dto;
 
+import com.vaccine.VaccineAPI.entity.Usuario;
 import com.vaccine.VaccineAPI.entity.Vacinacao;
 
 import javax.validation.constraints.Email;
@@ -17,20 +18,57 @@ public class VacinacaoDTO {
     @NotNull
     private LocalDate dataAplicacao;
 
-    public VacinacaoDTO (){
+    public VacinacaoDTO() {
     }
 
-    public VacinacaoDTO(Vacinacao vacinao){
-        this.id = vacinao.getId();
-        this.nomeVacina = vacinao.getNomeVacina();
-        this.usuarioEmail = vacinao.getUsuarioEmail();
-        this.dataAplicacao = vacinao.getDataApalicao();
+    public VacinacaoDTO(Vacinacao vacinacao) {
+        this.id = vacinacao.getId();
+        this.nomeVacina = vacinacao.getNomeVacina();
+        this.usuarioEmail = vacinacao.getUsuario().getEmail();
+        this.dataAplicacao = vacinacao.getDataAplicacao();
     }
 
-    public static Vacinacao converter(VacinacaoDTO vacinacaoDTO){
-            Vacinacao vacinao = new Vacinacao();
-            vacinao.setNomeVacina(vacinacaoDTO.getNomeVacina());
-            vacinao.setUsuarioEmail(vacinacaoDTO.getUsuarioEmail());
-            vacinao.setDataApalicao(vacinacaoDTO.getDataAplicacao);
-             return vacinao;
+    public static Vacinacao converter(VacinacaoDTO vacinacaoDTO, Usuario usuario){
+        Vacinacao vacinacao = new Vacinacao();
+        vacinacao.setNomeVacina(vacinacaoDTO.getNomeVacina());
+        vacinacao.setUsuario(usuario);
+        vacinacao.setDataAplicacao(vacinacaoDTO.getDataAplicacao());
+        return vacinacao;
+    }
+
+    //Getters e Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomeVacina() {
+        return nomeVacina;
+    }
+
+    public void setNomeVacina(String nomeVacina) {
+        this.nomeVacina = nomeVacina;
+    }
+
+    public String getUsuarioEmail() {
+        return usuarioEmail;
+    }
+
+    public void setUsuarioEmail(String usuarioEmail) {
+        this.usuarioEmail = usuarioEmail;
+    }
+
+    public LocalDate getDataAplicacao() {
+        return dataAplicacao;
+    }
+
+    public void setDataAplicacao(LocalDate dataAplicacao) {
+        this.dataAplicacao = dataAplicacao;
+    }
+
+
 }

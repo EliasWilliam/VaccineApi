@@ -9,6 +9,35 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class UsuarioDTO {
+    private Long id;
+    @NotBlank
+    private String nome;
+    @Email @NotBlank
+    private String email;
+    @CPF @NotBlank
+    private String cpf;
+    @NotNull
+    private LocalDate dataNascimento;
+
+    public UsuarioDTO() {}
+
+    public UsuarioDTO(Usuario usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.cpf = usuario.getCpf();
+        this.dataNascimento = usuario.getDataNascimento();
+    }
+
+    public static Usuario converter(UsuarioDTO usuarioDto){
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDto.getNome());
+        usuario.setEmail(usuarioDto.getEmail());
+        usuario.setCpf(usuarioDto.getCpf());
+        usuario.setDataNascimento(usuarioDto.getDataNascimento());
+        return usuario;
+    }
+
     public Long getId() {
         return id;
     }
@@ -48,43 +77,4 @@ public class UsuarioDTO {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    private Long id;
-    @NotBlank
-    private String nome;
-    @Email @NotBlank
-    @private String email;
-    @CPF @NotBlank
-    private String cpf;
-    @NotNull
-    private LocalDate dataNascimento;
-
-    public UsuarioDTO() {}
-
-    public UsuarioDTO(Usuario usuario){
-        this.id = usuario.getId();
-        this.nome = usuario.getNome();
-        this.email = usuario.getEmail();
-        this.cpf = usuario.getCpf();
-        this.dataNascimento = usuario.getDataNascimento();
-    }
-
- public static Usuario converter = (UsuarioDTO usuarioDto){
-     Usuario usuario = new Usuario();
-        Usuario usuarioDto;
-        usuario.setNome(usuarioDto.getNome());
-    usuario.setEmail(usuarioDto.getEmail());
-    usuario.setCpf(usuarioDto.getCpf());
-    usuario.setDataNascimento(usuarioDto.getDataNascimento());
-    return usuario;
-
-}
 }
