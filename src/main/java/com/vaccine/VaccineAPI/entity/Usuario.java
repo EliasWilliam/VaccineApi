@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(uniqueConstraints ={
-        @UniqueConstraint(columnNames = "email", name = "email_us"),
-        @UniqueConstraint(columnNames = "cpf", name = "cpf_us")}
+        @UniqueConstraint(columnNames = "email", name = "email_uk"),
+        @UniqueConstraint(columnNames = "cpf", name = "cpf_uk")}
 
 )
 public class Usuario {
