@@ -19,6 +19,4 @@ public class ExceptionResponse {
     public String getMessage() {return message; }
 
     public String getDetails() {return details; }
-
-
 }

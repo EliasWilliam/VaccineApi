@@ -24,19 +24,19 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler({DataIntegrityViolationException.class})
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public ErroValidacaoResponse handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest webRequest) {
-        String message = ex.getMessage();
-        String campo = webRequest.getDescription(false);
+    public ErroValidacaoResponse handleDataIntegrityViolationException
+            (DataIntegrityViolationException ex, WebRequest webRequest) {
+       String message = ex.getMessage();
+       String campo = webRequest.getDescription(false);
         if (ex.getMessage().contains("email_uk")) {
-            message = "Esse email ja esta cadastrado";
-            campo = "email";
+           message = "Esse email ja esta cadastrado";
+           campo = "email";
         }
-        if (ex.getMessage().contains("cpf_uk")) {
+       if (ex.getMessage().contains("cpf_uk")) {
             message = "Esse cpf ja esta cadastrado";
-            campo = "cpf";
-        }
-        return new ErroValidacaoResponse(campo,message);
-    }
+           campo = "cpf";
+        }     return new ErroValidacaoResponse(campo,message);
+   }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
